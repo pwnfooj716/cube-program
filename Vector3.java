@@ -1,3 +1,5 @@
+// This class represents a 3 dimensional vector that the normal vector operations can be applied to
+
 public class Vector3 {
     private int x;
     private int y;
