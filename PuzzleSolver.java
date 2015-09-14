@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class PuzzleSolver<Puzzle> {
     private Puzzle puzzle;
 
@@ -13,14 +15,15 @@ public class PuzzleSolver<Puzzle> {
 		
 	    }
 	}
+	return null;
     }
 
     private String[] select(List<String> population, List<Double> fitnesses) {
-	
+	return null;
     }
 
     private String mutate(String chromosome, double p) {
-	
+	return null;
     }
 
     public void run(Puzzle puzzle, double p_m) {
