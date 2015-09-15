@@ -3,7 +3,7 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.function.ToIntFunction;
 
-public class ThreeByThreeCube implements Puzzle {
+public class ThreeByThreeCube extends Puzzle {
     public static final Vector3 FACE_U = new Vector3(0, 0, 1);
     public static final Vector3 FACE_D = new Vector3(0, 0, -1);
     public static final Vector3 FACE_L = new Vector3(0, -1, 0);
@@ -14,6 +14,8 @@ public class ThreeByThreeCube implements Puzzle {
     private ArrayList<Cubie> cubies = new ArrayList<Cubie>();
 
     public ThreeByThreeCube() {
+	super("U D L R F B", "' 2");
+	
 	for (int k = -1; k <= 1; k++) {
 	    for (int j = -1; j <= 1; j++) {
 		for (int i = -1; i <= 1; i++) {
