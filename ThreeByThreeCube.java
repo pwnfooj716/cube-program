@@ -27,6 +27,28 @@ public class ThreeByThreeCube extends Puzzle {
 	}
     }
 
+    public ThreeByThreeCube(String scramble) {
+	super("U D L R F B", "' 2");
+	
+	for (int k = -1; k <= 1; k++) {
+	    for (int j = -1; j <= 1; j++) {
+		for (int i = -1; i <= 1; i++) {
+		    if ((i != 0) || (j != 0) || (k != 0)) {
+			cubies.add(new Cubie(i, j, k));
+		    }
+		}
+	    }
+	}
+
+	applyMoves(scramble);
+    }
+
+    protected Object clone() throws CloneNotSupportedException {
+	ThreeByThreeCube newCube = (ThreeByThreeCube)super.clone();
+	cubies = new ArrayList<Cubie>(cubies);
+	return newCube;
+    }
+
     public void print() {
 	Cubie[][][] array = arrangeCubies();
 
@@ -215,8 +237,15 @@ public class ThreeByThreeCube extends Puzzle {
 
     public static void main(String[] args) {
 	ThreeByThreeCube cube = new ThreeByThreeCube();
-	cube.print();
-	cube.applyMoves("R U R' U'");
-	cube.print();
+	try {
+	    ThreeByThreeCube newCube = (ThreeByThreeCube)cube.clone();
+	    newCube.applyMoves("R U R' U'");
+	    cube.print();
+	    System.out.println();
+	    newCube.print();
+	}
+	catch (CloneNotSupportedException e) {
+	    System.err.println("Cannot clone ThreeByThreeCube");
+	}
     }
 }

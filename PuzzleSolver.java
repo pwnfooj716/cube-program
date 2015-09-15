@@ -1,6 +1,10 @@
 import java.util.List;
+import java.util.ArrayList;
 
 public class PuzzleSolver {
+    private static final int POP_SIZE = 50;
+    private static final int INITIAL_LENGTH = 5;
+    
     private Puzzle puzzle;
 
     public PuzzleSolver(Puzzle puzzle) {
@@ -27,16 +31,29 @@ public class PuzzleSolver {
 	return chromosome.substring(0, chromosome.length() - 1);
     }
 
-    private String[] select(List<String> population, List<Double> fitnesses) {
-	return null;
-    }
-
     private String mutate(String chromosome, double p) {
 	return null;
     }
 
+    private String[] select(List<String> population, List<Double> fitnesses) {
+	return null;
+    }
+
     public void run(Puzzle puzzle, double p_m) {
+	ArrayList<String> population = new ArrayList<String>();
+	ArrayList<Double> fitnesses = new ArrayList<Double>();
 	
+	for (int i = 0; i < POP_SIZE; i++) {
+	    String chromosome = generate(INITIAL_LENGTH);
+	    population.add(chromosome);
+	    Puzzle newPuzzle = puzzle;//.clone().applyMoves(chromosome);
+	    fitnesses.add(newPuzzle.fitness());
+	}
+
+	System.out.println("Population:");
+	for (int i = 0; i < population.size(); i++) {
+	    System.out.println(population.get(i) + ": " + fitnesses.get(i));
+	}
     }
 
     public void run(Puzzle puzzle, double p_m, int iterations) {
