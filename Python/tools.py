@@ -46,7 +46,7 @@ class Vector:
     def __str__(self):
         return "<" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ">"
 
-    # Version 2: xi, yj, zk notation
+    # Version 2: xi + yj + zk notation
     # def __str__(self):
     #     s = ""
     #     if self.x != 0:
