@@ -85,7 +85,7 @@ class Cubie:
         if location == None:
             self.location = identity
         else:
-            self.lcation = location
+            self.location = location
         self.orientationX = orientationX
         self.orientationY = orientationY
 
