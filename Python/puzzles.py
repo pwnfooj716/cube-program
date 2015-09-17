@@ -34,7 +34,8 @@ class ThreeByThreeCube(Puzzle):
                        for k in range(-1, 2)]
         if scramble != None:
             self.applyMoves(scramble)
-        print(self)
+        else:
+            print(self)
 
     def arrangeCubies(self):
         array = {}
