@@ -3,13 +3,6 @@
 import tools
 
 class Puzzle:
-    FACE_U = tools.Vector.k
-    FACE_D = tools.Vector.k.negate()
-    FACE_L = tools.Vector.j.negate()
-    FACE_R = tools.Vector.j
-    FACE_F = tools.Vector.i
-    FACE_B = tools.Vector.i.negate()
-    
     def __init__(self, moves, modifiers):
         self.moves = moves.split(" ")
         self.modifiers = [""] + modifiers.split(" ")
@@ -26,6 +19,13 @@ class Puzzle:
         return "Moves: " + str(self.moves) + "\nModifiers: " + str(self.modifiers)
 
 class ThreeByThreeCube(Puzzle):
+    FACE_U = tools.Vector.k
+    FACE_D = tools.Vector.k.negate()
+    FACE_L = tools.Vector.j.negate()
+    FACE_R = tools.Vector.j
+    FACE_F = tools.Vector.i
+    FACE_B = tools.Vector.i.negate()
+    
     def __init__(self, scramble = None):
         Puzzle.__init__(self, "U D L R F B", "' 2")
         self.cubies = [tools.Cubie(tools.Vector(i, j, k))
