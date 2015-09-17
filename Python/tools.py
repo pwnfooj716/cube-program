@@ -73,20 +73,25 @@ class Vector:
     #         s += "k"
     #     return s
 
+Vector.zero = Vector(0, 0, 0)
 Vector.i = Vector(1, 0, 0)
 Vector.j = Vector(0, 1, 0)
 Vector.k = Vector(0, 0, 1)
 
 
 class Cubie:
-    def __init__(self, identity):
+    def __init__(self, identity, location = None, orientationX = Vector.i, orientationY = Vector.j):
         self.identity = identity
-        self.location = identity
-        self.orientationX = Vector.i
-        self.orientationY = Vector.j
-
-    def __init__(self, identity, location, orientationX, orientationY):
-        self.identity = identity
-        self.location = location
+        if location == None:
+            self.location = identity
+        else:
+            self.lcation = location
         self.orientationX = orientationX
         self.orientationY = orientationY
+
+    def __str__(self):
+        s = "Identity: " + str(self.identity) + "\n"
+        s += "Location: " + str(self.location) + "\n"
+        s += "OrientationX: " + str(self.orientationX) + "\n"
+        s += "OrientationY: " + str(self.orientationY) + "\n"
+        return s
