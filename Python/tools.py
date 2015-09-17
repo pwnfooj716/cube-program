@@ -93,5 +93,5 @@ class Cubie:
         s = "Identity: " + str(self.identity) + "\n"
         s += "Location: " + str(self.location) + "\n"
         s += "OrientationX: " + str(self.orientationX) + "\n"
-        s += "OrientationY: " + str(self.orientationY) + "\n"
+        s += "OrientationY: " + str(self.orientationY)
         return s
