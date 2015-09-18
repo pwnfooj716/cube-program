@@ -1,6 +1,8 @@
 import math
 
+
 class Vector:
+
     def __init__(self, x = 0, y = 0, z = 0):
         self.x = x
         self.y = y
@@ -80,6 +82,7 @@ Vector.k = Vector(0, 0, 1)
 
 
 class Cubie:
+    
     def __init__(self, identity, location = None, orientationX = Vector.i, orientationY = Vector.j):
         self.identity = identity
         if location == None:

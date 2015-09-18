@@ -1,10 +1,11 @@
 import random
-import puzzles
 
 POP_SIZE = 50
 INITIAL_LENGTH = 5
 
+
 class PuzzleSolver:
+    
     def __init__(self, puzzle):
         self.puzzle = puzzle
 
