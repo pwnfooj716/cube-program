@@ -44,6 +44,9 @@ class Vector:
     def proj(self, onto):
         return onto.times(self.dot(onto) / (onto.magnitude() ** 2))
 
+    def parallel_to(self, other):
+        return self.cross(other).equals(Vector.zero)
+
     # Version 1: <x, y, z> notation
     def __str__(self):
         return "<" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ">"

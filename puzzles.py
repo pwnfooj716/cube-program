@@ -14,6 +14,10 @@ class Puzzle:
     def apply_moves(self, algorithm):
         raise NotImplementedError
 
+    @staticmethod
+    def is_parallel(move1, move2):
+        raise NotImplementedError
+
     def fitness(self):
         raise NotImplementedError
 
@@ -21,15 +25,7 @@ class Puzzle:
         return "Moves: " + str(self.moves) + "\nModifiers: " + str(self.modifiers)
 
     
-class ThreeByThreeCube(Puzzle):
-    
-    FACE_U = Vector.k
-    FACE_D = Vector.k.negate()
-    FACE_L = Vector.j.negate()
-    FACE_R = Vector.j
-    FACE_F = Vector.i
-    FACE_B = Vector.i.negate()
-    
+class ThreeByThreeCube(Puzzle):    
 
     def __init__(self, scramble = None):
         Puzzle.__init__(self, "U D L R F B", "' 2")
@@ -121,6 +117,13 @@ class ThreeByThreeCube(Puzzle):
             self.apply_move(move)
         print(self)
 
+    @staticmethod
+    def is_parallel(move1, move2):
+        try:
+            return ThreeByThreeCube.get_vector[move1].parallel_to(ThreeByThreeCube.get_vector[move2])
+        except KeyError:
+            return False
+
     def fitness(self):
         return 0
 
@@ -132,26 +135,29 @@ class ThreeByThreeCube(Puzzle):
             for i in range(-1, 2):
                 s += " "
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[-1, j, k], ThreeByThreeCube.FACE_B)
+                s += ThreeByThreeCube.get_color(array[-1, j, k], ThreeByThreeCube.get_vector["B"])
             s += "\n"
         for i in range(-1, 2):
             for k in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[i, -1, k], ThreeByThreeCube.FACE_L)
+                s += ThreeByThreeCube.get_color(array[i, -1, k], ThreeByThreeCube.get_vector["L"])
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[i, j, 1], ThreeByThreeCube.FACE_U)
+                s += ThreeByThreeCube.get_color(array[i, j, 1], ThreeByThreeCube.get_vector["U"])
             for k in range(1, -2, -1):
-                s += ThreeByThreeCube.get_color(array[i, 1, k], ThreeByThreeCube.FACE_R)
+                s += ThreeByThreeCube.get_color(array[i, 1, k], ThreeByThreeCube.get_vector["R"])
             s += "\n"
         for k in range(1, -2, -1):
             for i in range(-1, 2):
                 s += " "
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[1, j, k], ThreeByThreeCube.FACE_F)
+                s += ThreeByThreeCube.get_color(array[1, j, k], ThreeByThreeCube.get_vector["F"])
             s += "\n"
         for i in range(1, -2, -1):
             for k in range(-1, 2):
                 s += " "
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[i, j, -1], ThreeByThreeCube.FACE_D)
+                s += ThreeByThreeCube.get_color(array[i, j, -1], ThreeByThreeCube.get_vector["D"])
             s += "\n"
         return s[:-1]
+
+ThreeByThreeCube.get_vector = {"U": Vector.k, "D": Vector.k.negate(), "L": Vector.j.negate(),
+                               "R": Vector.j, "F": Vector.i, "B": Vector.i.negate()}
