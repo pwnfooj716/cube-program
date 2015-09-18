@@ -50,19 +50,19 @@ class ThreeByThreeCube(Puzzle):
 
     @staticmethod
     def get_color(cubie, face):
-        if face.equals(cubie.orientationX):
+        if face.equals(cubie.orientation_x):
             return 'R'
-        elif face.equals(cubie.orientationX.negate()):
+        elif face.equals(cubie.orientation_x.negate()):
             return 'O'
-        elif face.equals(cubie.orientationY):
+        elif face.equals(cubie.orientation_y):
             return 'B'
-        elif face.equals(cubie.orientationY.negate()):
+        elif face.equals(cubie.orientation_y.negate()):
             return 'G'
         else:
-            orientationZ = cubie.orientationX.cross(cubie.orientationY)
-            if face.equals(orientationZ):
+            orientation_z = cubie.orientation_x.cross(cubie.orientation_y)
+            if face.equals(orientation_z):
                 return 'W'
-            elif face.equals(orientationZ.negate()):
+            elif face.equals(orientation_z.negate()):
                 return 'Y'
         return 'N'
 
@@ -112,8 +112,8 @@ class ThreeByThreeCube(Puzzle):
 
         for cubie in filter(keep, self.cubies):
             cubie.location = transform(cubie.location)
-            cubie.orientationX = transform(cubie.orientationX)
-            cubie.orientationY = transform(cubie.orientationY)
+            cubie.orientation_x = transform(cubie.orientation_x)
+            cubie.orientation_y = transform(cubie.orientation_y)
 
     def apply_moves(self, algorithm):
         moves = algorithm.split(" ")

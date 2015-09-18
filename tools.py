@@ -83,18 +83,18 @@ Vector.k = Vector(0, 0, 1)
 
 class Cubie:
     
-    def __init__(self, identity, location = None, orientationX = Vector.i, orientationY = Vector.j):
+    def __init__(self, identity, location = None, orientation_x = Vector.i, orientation_y = Vector.j):
         self.identity = identity
         if location == None:
             self.location = identity
         else:
             self.location = location
-        self.orientationX = orientationX
-        self.orientationY = orientationY
+        self.orientation_x = orientation_x
+        self.orientation_y = orientation_y
 
     def __str__(self):
         s = "Identity: " + str(self.identity) + "\n"
         s += "Location: " + str(self.location) + "\n"
-        s += "OrientationX: " + str(self.orientationX) + "\n"
-        s += "OrientationY: " + str(self.orientationY)
+        s += "Orientation_x: " + str(self.orientation_y) + "\n"
+        s += "Orientation_y: " + str(self.orientation_y)
         return s
