@@ -57,7 +57,7 @@ class PuzzleSolver:
         while len(population) > POP_SIZE:
             sum = 0
             for chromosome in population.keys():
-                fitness = population[chromosome]
+                fitness = population[chromosome] # Revert this when the bsfix is not needed
                 sum += 1 - fitness
             r = random.random()
             accumulation = 0
