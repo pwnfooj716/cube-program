@@ -1,4 +1,5 @@
 # Keep a history of past moves and be able to undo them?
+import math
 
 from tools import Vector, Cubie
 
@@ -35,8 +36,6 @@ class ThreeByThreeCube(Puzzle):
                        for k in range(-1, 2)]
         if scramble is not None:
             self.apply_moves(scramble)
-        else:
-            print(self)
 
     def arrange_cubies(self):
         array = {}
@@ -112,10 +111,15 @@ class ThreeByThreeCube(Puzzle):
             cubie.orientation_y = transform(cubie.orientation_y)
 
     def apply_moves(self, algorithm):
+        if algorithm == "":
+            return
         moves = algorithm.split(" ")
         for move in moves:
-            self.apply_move(move)
-        print(self)
+            if move == "":
+                print("What the fuck?")
+                break
+            else:
+                self.apply_move(move)
 
     @staticmethod
     def is_parallel(move1, move2):
@@ -125,7 +129,15 @@ class ThreeByThreeCube(Puzzle):
             return False
 
     def fitness(self):
-        return 0
+        # There are 26 individual cubies, so there are 25 unique comparisons to be done
+        matches = 0
+        for cubie1 in self.cubies:
+            for cubie2 in self.cubies:
+                x_matches = cubie1.orientation_x.equals(cubie2.orientation_x)
+                y_matches = cubie1.orientation_y.equals(cubie2.orientation_y)
+                if x_matches and y_matches:
+                    matches += 1
+        return math.sqrt(matches / (len(self.cubies) ** 2))
 
     # Reimplement uses ncurses library
     def __str__(self):
