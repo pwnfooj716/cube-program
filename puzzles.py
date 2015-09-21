@@ -137,7 +137,7 @@ class ThreeByThreeCube(Puzzle):
                 y_matches = cubie1.orientation_y.equals(cubie2.orientation_y)
                 if x_matches and y_matches:
                     matches += 1
-        return math.sqrt(matches / (len(self.cubies) ** 2))
+        return math.sqrt(matches) / len(self.cubies)
 
     # Reimplement uses ncurses library
     def __str__(self):
