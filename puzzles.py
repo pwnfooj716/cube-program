@@ -26,7 +26,7 @@ class Puzzle:
         return "Moves: " + str(self.moves) + "\nModifiers: " + str(self.modifiers)
 
     
-class ThreeByThreeCube(Puzzle):    
+class ThreeByThreeSuperCube(Puzzle):    
 
     def __init__(self, scramble = None):
         Puzzle.__init__(self, "U D L R F B", "' 2")
@@ -173,3 +173,9 @@ class ThreeByThreeCube(Puzzle):
 
 ThreeByThreeCube.get_vector = {"U": Vector.k, "D": Vector.k.negate(), "L": Vector.j.negate(),
                                "R": Vector.j, "F": Vector.i, "B": Vector.i.negate()}
+
+
+class ThreeByThreeCube(ThreeByThreeSuperCube):
+
+    def __init__(self):
+        
