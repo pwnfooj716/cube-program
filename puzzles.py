@@ -129,7 +129,6 @@ class ThreeByThreeSuperCube(Puzzle):
             return False
 
     def fitness(self):
-        # There are 26 individual cubies, so there are 25 unique comparisons to be done
         matches = 0
         for cubie1 in self.cubies:
             for cubie2 in self.cubies:
@@ -139,7 +138,6 @@ class ThreeByThreeSuperCube(Puzzle):
                     matches += 1
         return math.sqrt(matches) / len(self.cubies)
 
-    # Reimplement uses ncurses library
     def __str__(self):
         s = Puzzle.__str__(self) + "\n"
         array = self.arrange_cubies()
@@ -178,4 +176,3 @@ ThreeByThreeCube.get_vector = {"U": Vector.k, "D": Vector.k.negate(), "L": Vecto
 class ThreeByThreeCube(ThreeByThreeSuperCube):
 
     def __init__(self):
-        
