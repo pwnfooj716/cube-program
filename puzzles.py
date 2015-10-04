@@ -111,6 +111,14 @@ class ThreeSCube(Puzzle):
             cubie.orientation_x = transform(cubie.orientation_x)
             cubie.orientation_y = transform(cubie.orientation_y)
 
+    def apply_inverse(self, move):
+        if len(move) == 1:
+            self.apply_moves(move[0]+"'")
+        elif move[1] == "'":
+            self.apply_moves(move[0])
+        elif move[1] == "2":
+            self.apply_moves(move[0] + "2")
+
     def apply_moves(self, algorithm):
         if algorithm == "":
             return
@@ -139,9 +147,20 @@ class ThreeSCube(Puzzle):
                     matches += 1
         return math.sqrt(matches) / len(self.cubies)
 
+    def random_move(self):
+        s = random.choice(self.moves) + random.choice(self.modifiers)
+        self.apply_move(s)
+
     def scramble(self):
-        for i in range(1, 20):
-            self.apply_move(random.choice(self.moves) + random.choice(self.modifiers))
+        prev="k"
+        i=0
+        while i<20:
+            s = random.choice(self.moves) + random.choice(self.modifiers)
+            if (s[0] != prev[0]):
+                print(s)
+                self.apply_move(s)
+                prev = s
+                i+=1
 
     def __str__(self):
         s = Puzzle.__str__(self) + "\n"

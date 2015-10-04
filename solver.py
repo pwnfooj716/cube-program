@@ -131,7 +131,42 @@ class SolveW: #White Side Solve
         for c in self.puzzle.cubies:
             if (c.is_edge() and c.identity.z == 1):
                 print(c)
+        moves = [0]
+        currMove = ""
+        solutions = []
+        temp = copy.deepcopy(self.puzzle)
+        solved = False
+        while solved == False:
+            print(moves)
+            for i in range(len(moves)):
+                temp.apply_move(temp.moves[moves[i]%6] + temp.modifiers[moves[i]//6])
+                currMove += str(temp.moves[moves[i]%6] + temp.modifiers[moves[i]//6])
+            tempSolve = True
+            WEdges = [Vector(1, 0, 1), Vector(-1, 0, 1), Vector(0, 1, 1), Vector(0, -1, 1)]
+            for v in WEdges:
+                c = temp.arrange_cubies()[v.x, v.y, v.z]
+                if ((c.orientation_x.equals(Vector(1, 0, 0))) and (c.orientation_y.equals(Vector(0, 1, 0)))) == False:
+                    tempSolve = False
+                    break
+            if tempSolve:
+                solutions += [currMove]
+                print(currMove)
+            moves[len(moves)-1]+=1
+            temp = copy.deepcopy(self.puzzle)
+            currMove = ""
+            for i in range (len(moves)-1, 0, -1):
+                if (moves[i] == 18):b
+                    moves[i] = 0
+                    moves[i-1]+=1
+            if moves[0] == 18:
+                if len(solutions) > 0:
+                    solved = True
+                    break
+                moves[0] = 0
+                moves+=[0]
+        return solutions
+        
 
 p = SolveW(ThreeSCube())
 p.puzzle.scramble()
-p.cross()
+print(p.cross())
