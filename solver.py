@@ -1,7 +1,9 @@
 import random
 import copy
+import tools
 
-from puzzles import ThreeByThreeCube
+from puzzles import ThreeSCube
+from tools import Vector
 
 POP_SIZE = 10
 POP_MULTIPLY = 5
@@ -15,7 +17,7 @@ P_LC = 0.1
 # then pick the top 10 from those 50
 # repeat
 
-class PuzzleSolver:
+class PuzzleSolverGenetic:
     
     def __init__(self, puzzle):
         self.puzzle = puzzle
@@ -119,3 +121,17 @@ class PuzzleSolver:
     #     print("Final sorted:")
     #     for item in sorted_population:
     #         print(item)
+
+class SolveW: #White Side Solve
+    
+    def __init__(self, puzzle):
+        self.puzzle = puzzle
+
+    def cross(self):
+        for c in self.puzzle.cubies:
+            if (c.is_edge() and c.identity.z == 1):
+                print(c)
+
+p = SolveW(ThreeSCube())
+p.puzzle.scramble()
+p.cross()

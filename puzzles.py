@@ -1,5 +1,6 @@
 # Keep a history of past moves and be able to undo them?
 import math
+import random
 
 from tools import Vector, Cubie
 
@@ -26,14 +27,14 @@ class Puzzle:
         return "Moves: " + str(self.moves) + "\nModifiers: " + str(self.modifiers)
 
     
-class ThreeByThreeSuperCube(Puzzle):    
+class ThreeSCube(Puzzle):    
 
     def __init__(self, scramble = None):
         Puzzle.__init__(self, "U D L R F B", "' 2")
         self.cubies = [Cubie(Vector(i, j, k))
                        for i in range(-1, 2)
                        for j in range(-1, 2)
-                       for k in range(-1, 2)]
+                       for k in range(-1, 2) if (i!=0) or (j!=0) or (k!=0)]
         if scramble is not None:
             self.apply_moves(scramble)
 
@@ -124,7 +125,7 @@ class ThreeByThreeSuperCube(Puzzle):
     @staticmethod
     def is_parallel(move1, move2):
         try:
-            return ThreeByThreeCube.get_vector[move1].parallel_to(ThreeByThreeCube.get_vector[move2])
+            return ThreeSCube.get_vector[move1].parallel_to(ThreeSCube.get_vector[move2])
         except KeyError:
             return False
 
@@ -138,6 +139,10 @@ class ThreeByThreeSuperCube(Puzzle):
                     matches += 1
         return math.sqrt(matches) / len(self.cubies)
 
+    def scramble(self):
+        for i in range(1, 20):
+            self.apply_move(random.choice(self.moves) + random.choice(self.modifiers))
+
     def __str__(self):
         s = Puzzle.__str__(self) + "\n"
         array = self.arrange_cubies()
@@ -145,34 +150,35 @@ class ThreeByThreeSuperCube(Puzzle):
             for i in range(-1, 2):
                 s += " "
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[-1, j, k], ThreeByThreeCube.get_vector["B"])
+                s += ThreeSCube.get_color(array[-1, j, k], ThreeSCube.get_vector["B"])
             s += "\n"
         for i in range(-1, 2):
             for k in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[i, -1, k], ThreeByThreeCube.get_vector["L"])
+                s += ThreeSCube.get_color(array[i, -1, k], ThreeSCube.get_vector["L"])
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[i, j, 1], ThreeByThreeCube.get_vector["U"])
+                s += ThreeSCube.get_color(array[i, j, 1], ThreeSCube.get_vector["U"])
             for k in range(1, -2, -1):
-                s += ThreeByThreeCube.get_color(array[i, 1, k], ThreeByThreeCube.get_vector["R"])
+                s += ThreeSCube.get_color(array[i, 1, k], ThreeSCube.get_vector["R"])
             s += "\n"
         for k in range(1, -2, -1):
             for i in range(-1, 2):
                 s += " "
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[1, j, k], ThreeByThreeCube.get_vector["F"])
+                s += ThreeSCube.get_color(array[1, j, k], ThreeSCube.get_vector["F"])
             s += "\n"
         for i in range(1, -2, -1):
             for k in range(-1, 2):
                 s += " "
             for j in range(-1, 2):
-                s += ThreeByThreeCube.get_color(array[i, j, -1], ThreeByThreeCube.get_vector["D"])
+                s += ThreeSCube.get_color(array[i, j, -1], ThreeSCube.get_vector["D"])
             s += "\n"
         return s[:-1]
 
-ThreeByThreeCube.get_vector = {"U": Vector.k, "D": Vector.k.negate(), "L": Vector.j.negate(),
+ThreeSCube.get_vector = {"U": Vector.k, "D": Vector.k.negate(), "L": Vector.j.negate(),
                                "R": Vector.j, "F": Vector.i, "B": Vector.i.negate()}
 
 
-class ThreeByThreeCube(ThreeByThreeSuperCube):
+class ThreeByThreeCube(ThreeSCube):
 
     def __init__(self):
+        pass

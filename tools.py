@@ -96,8 +96,17 @@ class Cubie:
         self.orientation_y = orientation_y
 
     def __str__(self):
-        s = "Identity: " + str(self.identity) + "\n"
-        s += "Location: " + str(self.location) + "\n"
-        s += "Orientation_x: " + str(self.orientation_y) + "\n"
+        s = "Identity: " + str(self.identity) + " \t"
+        s += "Location: " + str(self.location) + " \t"
+        s += "Orientation_x: " + str(self.orientation_x) + "\t"
         s += "Orientation_y: " + str(self.orientation_y)
         return s
+
+    def is_edge(self):
+        return (abs(self.location.x)+abs(self.location.y)+abs(self.location.z) == 2)
+
+    def is_corner(self):
+        return (abs(self.location.x)+abs(self.location.y)+abs(self.location.z) == 3)
+
+    def is_center(self):
+        return (abs(self.location.x)+abs(self.location.y)+abs(self.location.z) == 1)
