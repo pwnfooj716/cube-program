@@ -127,7 +127,7 @@ class SolveW: #White Side Solve
     def __init__(self, puzzle):
         self.puzzle = puzzle
 
-    def cross(self):
+    def cross_bf(self):
         for c in self.puzzle.cubies:
             if (c.is_edge() and c.identity.z == 1):
                 print(c)
@@ -155,7 +155,7 @@ class SolveW: #White Side Solve
             temp = copy.deepcopy(self.puzzle)
             currMove = ""
             for i in range (len(moves)-1, 0, -1):
-                if (moves[i] == 18):b
+                if (moves[i] == 18):
                     moves[i] = 0
                     moves[i-1]+=1
             if moves[0] == 18:
@@ -169,4 +169,4 @@ class SolveW: #White Side Solve
 
 p = SolveW(ThreeSCube())
 p.puzzle.scramble()
-print(p.cross())
+print(p.cross_bf())
